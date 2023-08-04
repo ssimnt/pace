@@ -48,6 +48,8 @@ def decimal_to_minsecs(pace):
     return pace_mins, pace_secs
 
 def main():
+    KMS_PER_MILE = 1.609344
+
     # convert args to float, also removes entry point in pos [0]
     args = [float(x) for x in sys.argv[1:]]
     start, end, step = process_args(args)
@@ -56,7 +58,7 @@ def main():
 
     for speed in speed_range:
         pace_km = 1/(speed/60)
-        pace_mile = pace_km * 1.609344
+        pace_mile = pace_km * KMS_PER_MILE
         pace_km_mins, pace_km_secs = decimal_to_minsecs(pace_km)
         pace_ml_mins, pace_ml_secs = decimal_to_minsecs(pace_mile)
 
