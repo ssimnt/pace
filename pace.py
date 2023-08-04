@@ -12,32 +12,32 @@ def range_valid(start, end):
     else:
         return False
 
-def step_positive(step):
-    step = step if step > 0 else False
+def step_positive(step_size):
+    step_size = step_size if step_size > 0 else False
 
-    return step
+    return step_size
 
 def process_args(args):
     if args_present(args):
-        start, end, step = args
+        start, end, step_size = args
     else:
         print('missing args, using defaults')
         start = 6
         end = 15
-        step = 0.5
+        step_size = 0.5
 
     start, end = range_valid(start, end) or exit('invalid range')
-    step = step_positive(step) or exit('step must be positive')
+    step_size = step_positive(step_size) or exit('step must be positive')
 
-    return start, end, step
+    return start, end, step_size
 
-def frange(start, end, step):
+def frange(start, end, step_size):
     range = []
     x = start
 
     while x <= end:
         range.append(x)
-        x += step
+        x += step_size
 
     return range
 
@@ -52,8 +52,8 @@ def main():
 
     # convert args to float, also removes entry point in pos [0]
     args = [float(x) for x in sys.argv[1:]]
-    start, end, step = process_args(args)
-    speed_range = frange(start, end, step)
+    start, end, step_size = process_args(args)
+    speed_range = frange(start, end, step_size)
     output_rows = []
 
     for speed in speed_range:
